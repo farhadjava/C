@@ -7,18 +7,18 @@ void heading();
 void mainMenu();
 void addbook();
 void viewbook();
-void searchbook();
-void editbook();
-void deletebook();
-void Helpbook();
+//void searchbook();
+//void editbook();
+//void deletebook();
+//void Helpbook();
 //void exit();
 
 struct book_info{
      int id;
      char name[10];
      char author[10];
-     int quantity;
-     int rack;
+     int quantity[10];
+     int rack[10];
 };
  
 struct book_info a;
@@ -56,16 +56,16 @@ void mainMenu()
        viewbook();
    }
     else if(n==3){
-        searchbook();
+        //searchbook();
     }
      else if(n==4){ 
-         editbook();
+         //editbook();
      }
       else if(n==5){ 
-          deletebook();
+          //deletebook();
       }
        else if(n==6){ 
-           Helpbook();
+           //Helpbook();
         }
         //else if(n==7){ 
              //exit();
@@ -115,10 +115,10 @@ void addbook(){
   scanf("%s",a.author);
 
   printf("The Quantity :");
-  scanf("%d",a.quantity);
+  scanf("%s",a.quantity);
       
   printf("The Rack No :");
-  scanf("%d",a.rack);
+  scanf("%s",a.rack);
 
   fseek(file,0,SEEK_END);
   fwrite(&a,sizeof(a), 1, file);
@@ -131,22 +131,41 @@ void addbook(){
 }
 
 void viewbook(){
-     printf("VIEW book is ready...!\n");
+     int count = 0;
+     printf("\n\n\t\t ********** ViewBook List ***********\n\n");
+     printf("\tID\tName\tAuthor\tQuantity\tRack\n\n");
+     file = fopen("books.dat","rb");
+     while(fread(&a,sizeof(a),1,file)==1){
+         printf("\t%s",a.id);
+         printf("\t%s",a.name);
+         printf("\t%s",a.author);
+         printf("\t%s",a.quantity);
+         printf("\t%s",a.rack);
+
+         count = count + a.quantity;
+
+  }
+  printf("\n\t\t Have a total books %d",count);
+  printf("\n\n\t\tpress any key...");
+  fflush(stdin);
+  getchar();
+
+  mainMenu();
 }
 
-void editbook(){
-     printf("Can you Edit the book...!");
-}
-void searchbook(){
-     printf("Now you can Searchbook...!");
-}
+//void editbook(){
+     //printf("Can you Edit the book...!");
+//}
+//void searchbook(){
+     //printf("Now you can Searchbook...!");
+//}
 
-void Helpbook(){
-     printf("From now Any book you can want to help...!");
-}
-void deletebook(){
-     printf("Now as your wish can be Deletebook...!");
-}
+//void Helpbook(){
+     //printf("From now Any book you can want to help...!");
+//}
+//void deletebook(){
+     //printf("Now as your wish can be Deletebook...!");
+//}
 
 //void exit(){
      //printf("Open Exit...!");
